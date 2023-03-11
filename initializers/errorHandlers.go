@@ -9,11 +9,15 @@ import (
 func CustomErrorHandler(c *fiber.Ctx, err error) error {
     code := fiber.StatusInternalServerError
 
-    // Check if the error is a DB error
+    // Set appropriate status codes for gORM error types
     if errors.Is(err, gorm.ErrRecordNotFound) {
         code = fiber.StatusNotFound
     }
-    
+
+    if errors.Is(err, gorm.ErrInvalidTransaction) {
+        code = fiber.StatusBadRequest
+    }
+
     // Retrieve the custom status code if it's a *fiber.Error
     var e *fiber.Error
     if errors.As(err, &e) {

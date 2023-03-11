@@ -20,7 +20,8 @@ func CreateArticle(c *fiber.Ctx) error{
 
     result := initializers.DB.Create(&article)
     if result.Error != nil { return result.Error }
-    return c.JSON(&article)
+    c.JSON(&article)
+    return nil
 }
 
 // GetAllArticle godoc
@@ -32,7 +33,8 @@ func GetAllArticles(c *fiber.Ctx) error{
     var articles []models.Article
     result := initializers.DB.Find(&articles)
     if result.Error != nil { return result.Error }
-    return c.JSON(&articles)
+    c.JSON(&articles)
+    return nil
 }
 
 // GetArticle godoc
@@ -45,7 +47,8 @@ func GetArticle(c *fiber.Ctx) error{
     var article models.Article
     result := initializers.DB.First(&article, c.Params("id")) 
     if result.Error != nil { return result.Error }
-    return c.JSON(&article)
+    c.JSON(&article)
+    return nil
 }
 // UpdateArticle godoc
 // @Summary Updates an Article based on given ID
@@ -64,7 +67,8 @@ func UpdateArticle(c *fiber.Ctx) error{
     article.Content = c.FormValue("content")
     result = initializers.DB.Save(&article)
     if result.Error != nil { return result.Error }
-    return c.JSON(&article)
+    c.JSON(&article)
+    return nil
 }
 
 // DeleteArticle godoc
@@ -76,8 +80,9 @@ func UpdateArticle(c *fiber.Ctx) error{
 func DeleteArticle(c *fiber.Ctx) error{
     result := initializers.DB.Delete(&models.Article{}, c.Params("id"))
     if result.Error != nil { return result.Error }
-    return c.JSON(&fiber.Map{
+    c.JSON(&fiber.Map{
         "message": "Article deleted successfully",
     })
+    return nil
 }
 
