@@ -27,3 +27,12 @@ func ConnectToPostgresDB() {
         log.Fatal("Failed to connect to database")
     }
 }
+
+func ConnectToRoachDB() {
+    var err error
+    dsn := os.Getenv("ROACH_DB_URL")
+    DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+    if err != nil {
+        log.Fatal("Failed to connect to database")
+    }
+}
