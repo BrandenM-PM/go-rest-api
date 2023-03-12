@@ -5,7 +5,7 @@ import "github.com/BrandenM-PM/go-rest-api/models"
 
 func init() {
     initializers.LoadEnvVars()
-    initializers.ConnectToDB()
+    initializers.ConnectToPostgresDB()
 }
 
 func main() {

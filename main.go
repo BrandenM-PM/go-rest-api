@@ -29,7 +29,7 @@ import (
 
 func init() {
     initializers.LoadEnvVars()
-    initializers.ConnectToDB()
+    initializers.ConnectToPostgresDB()
 }
 
 func main() {
